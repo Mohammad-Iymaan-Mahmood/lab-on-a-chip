@@ -9,3 +9,20 @@ final _credentials = ServiceAccountCredentials.fromJson(
 
 final _client = await clientViaServiceAccount(_credentials, StorageApi.devStorageReadWriteScope);
 final _storage = StorageApi(_client);
+
+final _bucketName = 'my-bucket';
+await _storage.buckets.insert(
+  Bucket.fromJson({
+    'name': _bucketName,
+  }),
+);
+
+final _userData = 'user data';
+await _storage.objects.insert(
+  _bucketName,
+  Object.fromJson({
+    'name': 'user-data.txt',
+  }),
+  uploadMedia: Stream.value(utf8.encode(_userData)),
+);
+
