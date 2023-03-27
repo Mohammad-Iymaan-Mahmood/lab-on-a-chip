@@ -1,0 +1,19 @@
+Future<void> register(String email, String password) async {
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+    if (userCredential.user != null) {
+      // Create a new user document in Firestore
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
+        'email': email,
+        'created_at': DateTime.now(),
+      });
+    }
+  } on FirebaseAuthException catch (e) {
+    // Handle errors
+    print('Failed to create user: $e');
+  }
+}
