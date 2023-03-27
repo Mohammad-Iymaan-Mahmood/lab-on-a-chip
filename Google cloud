@@ -1,0 +1,11 @@
+import 'dart:io';
+
+import 'package:googleapis/storage/v1.dart';
+import 'package:googleapis_auth/auth_io.dart';
+
+final _credentials = ServiceAccountCredentials.fromJson(
+  File('path/to/service_account.json').readAsStringSync(),
+);
+
+final _client = await clientViaServiceAccount(_credentials, StorageApi.devStorageReadWriteScope);
+final _storage = StorageApi(_client);
