@@ -1,0 +1,44 @@
+bool _dropletIsDragging = false;
+late Offset _dropletPosition;
+
+@override
+Widget build(BuildContext context) {
+  return Stack(
+    children: [
+      // Add microfluidic platform widgets here
+      Positioned(
+        left: _dropletPosition.dx,
+        top: _dropletPosition.dy,
+        child: Draggable(
+          child: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(25),
+            ),
+          ),
+          feedback: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.blue.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(25),
+            ),
+          ),
+          onDragStarted: () {
+            setState(() {
+              _dropletIsDragging = true;
+            });
+          },
+          onDragEnd: (details) {
+            setState(() {
+              _dropletIsDragging = false;
+              _dropletPosition = details.offset;
+            });
+          },
+        ),
+      ),
+    ],
+  );
+}
