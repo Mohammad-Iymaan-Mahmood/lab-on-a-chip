@@ -1,2 +1,1 @@
-# lab-on-a-chip
-Code for the app of microfluids 
+Digital Microfluidics platforms are recent fluid-manipulation technology which is based on the concept of electrowetting. This concept uses induced voltage to decrease the contact angle of used liquids and manipulate small samples of liquid volumes ranging from microliters to nanoliters along individual electrodes. 
